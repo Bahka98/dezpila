@@ -237,7 +237,7 @@
 
         try {
             // Chamada para a sua Serverless Function na Vercel
-            const response = await fetch('/api/finalizar.mjs', {
+            const response = await fetch('/api/finalizar', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ nome, email, cpf })
