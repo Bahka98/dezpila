@@ -28,14 +28,12 @@
             max-width: 450px;
         }
 
-        /* Header Card */
-        .header-card {
+        .card {
             background: white;
             padding: 30px;
             border-radius: 12px;
-            text-align: center;
-            margin-bottom: 20px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
         }
 
         .brand-title {
@@ -43,33 +41,27 @@
             justify-content: center; 
             align-items: center;     
             margin-bottom: 15px;
-            width: 100%;
         }
+
         .brand-title img {
-            max-width: 180px; /* Ajuste esse valor conforme o formato da sua logo */
-            height: auto;     /* Mantém a proporção da imagem */
-            display: block;   /* Remove espaços indesejados abaixo da imagem */
-    }
+            max-width: 180px;
+            height: auto;
+            display: block;
+        }
 
         .price {
             font-size: 2.5rem;
             font-weight: bold;
+            text-align: center;
             margin: 10px 0;
         }
 
         .plan-name {
             font-size: 1rem;
             color: #666;
+            text-align: center;
             text-transform: uppercase;
             letter-spacing: 1px;
-        }
-
-        /* Form Card */
-        .form-card {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
         .form-group {
@@ -81,7 +73,6 @@
             margin-bottom: 8px;
             font-weight: 500;
             font-size: 0.9rem;
-            color: #555;
         }
 
         .input-with-icon {
@@ -94,7 +85,6 @@
             top: 50%;
             transform: translateY(-50%);
             color: #aaa;
-            font-size: 1.1rem;
         }
 
         .input-with-icon input {
@@ -105,45 +95,16 @@
             font-size: 1rem;
             box-sizing: border-box;
             outline: none;
-            transition: border-color 0.2s;
         }
 
-        .input-with-icon input:focus {
-            border-color: var(--primary-blue);
-        }
-
-        /* Payment Method */
         .payment-method {
             border: 2px solid var(--primary-blue);
             border-radius: 8px;
             padding: 15px;
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             gap: 15px;
             background-color: #f8fbff;
-            margin-bottom: 25px;
-        }
-
-        .pix-icon {
-            font-size: 1.8rem;
-            color: var(--primary-blue);
-        }
-
-        .payment-details h4 {
-            margin: 0 0 5px;
-            font-size: 1rem;
-        }
-
-        .payment-details p {
-            margin: 0;
-            font-size: 0.85rem;
-            color: #666;
-        }
-
-        .payment-select {
-            margin-left: auto;
-            color: var(--primary-blue);
-            font-size: 1.2rem;
         }
 
         .btn-generate {
@@ -156,46 +117,56 @@
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.2s;
+            margin-top: 10px;
         }
 
-        .btn-generate:hover {
-            background-color: #2364d6;
+        #pix-result {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px dashed #eee;
         }
 
-        /* Security Badges */
+        .copy-box {
+            background: #f0f0f0;
+            padding: 10px;
+            font-size: 0.7rem;
+            word-break: break-all;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin: 10px 0;
+        }
+
         .security-badges {
             display: flex;
             justify-content: center;
             gap: 15px;
             margin-top: 25px;
-            filter: grayscale(20%);
-            opacity: 0.8;
+            opacity: 0.6;
         }
 
-        .security-badges img {
-            height: 30px;
-        }
+        .security-badges img { height: 25px; }
     </style>
 </head>
 <body>
 
 <div class="checkout-wrapper">
-    <div class="header-card">
+    <div class="card">
         <div class="brand-title">
-            <img src="images/logo_dezpila.png" alt="Dezpila Logo" >
+            <img src="images/logo_dezpila.png" alt="Dezpila Logo">
         </div>
         <div class="price">R$ 10,00</div>
         <div class="plan-name">PLANO MENSAL</div>
     </div>
 
-    <div class="form-card">
-        <form>
+    <div class="card">
+        <form id="form-container">
             <div class="form-group">
                 <label for="nome">Nome</label>
                 <div class="input-with-icon">
                     <i class="far fa-user"></i>
-                    <input type="text" id="nome" placeholder="Nome completo">
+                    <input type="text" id="nome" placeholder="Nome completo" required>
                 </div>
             </div>
 
@@ -203,15 +174,7 @@
                 <label for="email">E-mail</label>
                 <div class="input-with-icon">
                     <i class="far fa-envelope"></i>
-                    <input type="email" id="email" placeholder="email@exemplo.com">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="telefone">Telefone (WhatsApp) *</label>
-                <div class="input-with-icon">
-                    <i class="fab fa-whatsapp"></i>
-                    <input type="text" id="telefone" placeholder="(11) 91234-5678">
+                    <input type="email" id="email" placeholder="email@exemplo.com" required>
                 </div>
             </div>
 
@@ -219,43 +182,44 @@
                 <label for="cpf">CPF</label>
                 <div class="input-with-icon">
                     <i class="far fa-id-card"></i>
-                    <input type="text" id="cpf" placeholder="000.000.000-00">
+                    <input type="text" id="cpf" placeholder="00000000000" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <label>Método de pagamento</label>
                 <div class="payment-method">
-                    <i class="fas fa-qrcode pix-icon"></i>
-                    <div class="payment-details">
-                        <h4>PIX</h4>
-                        <p>Receba em segundos, direto na conta.</p>
+                    <i class="fas fa-qrcode" style="color: var(--primary-blue); font-size: 1.5rem;"></i>
+                    <div>
+                        <h4 style="margin:0">PIX</h4>
+                        <p style="margin:0; font-size: 0.8rem; color: #666;">Liberação imediata</p>
                     </div>
-                    <i class="far fa-dot-circle payment-select"></i>
+                    <i class="fas fa-check-circle" style="margin-left: auto; color: var(--primary-blue);"></i>
                 </div>
             </div>
 
-            <button type="button" id="btn-finalizar" class="btn-generate">Gerar QR Code</button>
-
-<div id="pix-result" style="display: none; text-align: center; margin-top: 20px;">
-    <p>Escaneie o QR Code abaixo:</p>
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=ChavePixExemplo" alt="QR Code Pix" style="margin: 10px 0;">
-    
-    <p style="font-size: 0.8rem; font-weight: bold;">Código Pix (Copia e Cola):</p>
-    <div id="pix-code-text" style="background: #f0f0f0; padding: 10px; font-size: 0.7rem; word-break: break-all; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;">
-        00020126330014br.gov.bcb.pix0111suachavepix9999520400005303986540495.005802BR
-    </div>
-    <button type="button" id="btn-copy" style="background: #eee; border: 1px solid #ccc; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Copiar Código</button>
-</div>
+            <button type="button" class="btn-generate" id="btn-finalizar" onclick="gerarPix()">Gerar QR Code Pix</button>
         </form>
 
+        <div id="pix-result">
+            <p style="font-weight: bold;">Pague com Pix para finalizar:</p>
+            <img src="" id="qr-image" style="width: 200px; border: 1px solid #eee; padding: 10px; border-radius: 8px;">
+            
+            <p style="font-size: 0.8rem; margin-top: 15px; font-weight: bold;">Pix Copia e Cola:</p>
+            <div class="copy-box" id="pix-code-text">Aguardando código...</div>
+            
+            <button type="button" onclick="copiarCodigo()" style="background: #eee; border: 1px solid #ccc; padding: 8px 15px; border-radius: 5px; cursor: pointer;">
+                <i class="far fa-copy"></i> Copiar Código
+            </button>
+        </div>
+
         <div class="security-badges">
-            <img src="https://cdn-icons-png.flaticon.com/512/2913/2913452.png" alt="Norton Secured">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2048px-Google_%22G%22_Logo.svg.png" alt="Google">
-            <img src="https://cdn-icons-png.flaticon.com/512/3524/3524659.png" alt="SSL Secure">
+            <img src="https://cdn-icons-png.flaticon.com/512/2913/2913452.png" alt="Seguro">
+            <img src="https://cdn-icons-png.flaticon.com/512/3524/3524659.png" alt="SSL">
         </div>
     </div>
 </div>
+
 <script>
     async function gerarPix() {
         const nome = document.getElementById('nome').value;
@@ -263,35 +227,38 @@
         const cpf = document.getElementById('cpf').value;
 
         if(!nome || !email || !cpf) {
-            alert("Preencha todos os campos!");
+            alert("Por favor, preencha todos os campos corretamente.");
             return;
         }
 
-        const btn = document.querySelector('.btn-generate');
-        btn.innerText = "GERANDO...";
+        const btn = document.getElementById('btn-finalizar');
+        btn.innerText = "PROCESSANDO...";
         btn.disabled = true;
 
         try {
-            // Esta chamada só funciona se o arquivo api/finalizar.js estiver no servidor (Vercel)
+            // Chamada para a sua Serverless Function na Vercel
             const response = await fetch('/api/finalizar.mjs', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ nome, email, cpf })
             });
 
+            if (!response.ok) throw new Error("Erro no servidor");
+
             const data = await response.json();
 
             if (data.qr_code) {
+                // Esconde o formulário e mostra o QR Code
                 document.getElementById('form-container').style.display = 'none';
                 document.getElementById('pix-result').style.display = 'block';
+                
+                // Preenche os dados reais vindos do Mercado Pago
                 document.getElementById('qr-image').src = `data:image/jpeg;base64,${data.qr_code_base64}`;
                 document.getElementById('pix-code-text').innerText = data.qr_code;
-            } else {
-                throw new Error("Erro na resposta do servidor");
             }
         } catch (error) {
             console.error(error);
-            alert("Erro ao gerar Pix. Verifique se o backend está configurado.");
+            alert("Erro ao gerar Pix. Certifique-se de que o projeto está hospedado na Vercel com o backend configurado.");
             btn.innerText = "Gerar QR Code Pix";
             btn.disabled = false;
         }
@@ -299,9 +266,11 @@
 
     function copiarCodigo() {
         const texto = document.getElementById('pix-code-text').innerText;
-        navigator.clipboard.writeText(texto);
-        alert("Código copiado!");
+        navigator.clipboard.writeText(texto).then(() => {
+            alert("Código Pix copiado para a área de transferência!");
+        });
     }
 </script>
+
 </body>
 </html>
