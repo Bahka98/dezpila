@@ -273,7 +273,7 @@
 
         try {
             // Esta chamada só funciona se o arquivo api/finalizar.js estiver no servidor (Vercel)
-            const response = await fetch('/api/finalizar', {
+            const response = await fetch('/api/finalizar.mjs', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ nome, email, cpf })
