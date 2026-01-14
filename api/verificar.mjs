@@ -1,7 +1,7 @@
 import { MercadoPagoConfig, Payment } from 'mercadopago';
 
 export default async function handler(req, res) {
-    const { id } = req.query; // Recebe o ID do pagamento pela URL
+    const { id } = req.query;
     const client = new MercadoPagoConfig({ accessToken: process.env.MP_ACCESS_TOKEN });
     const payment = new Payment(client);
 
